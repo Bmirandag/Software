@@ -27,8 +27,6 @@ namespace Publicaciones.Backend {
         /// <returns>Link a la BD de Personas</returns>
         public DbSet < Persona > Personas {get; set; }
 
-        public DbSet <Publicacion> Publicacion{get;set;}
-
     }
 
 }
