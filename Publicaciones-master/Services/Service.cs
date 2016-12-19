@@ -15,7 +15,7 @@ namespace Publicaciones.Service {
 
         List< Publicacion > Publicaciones();
 
-        void Add(Persona persona); 
+        void AddPersona(Persona persona); 
 
         List < Persona > FindPersonas(string nombre);
 
@@ -89,7 +89,7 @@ namespace Publicaciones.Service {
         }
 
 
-        public void Add(Persona persona) {
+        public void AddPersona(Persona persona) {
 
             // Guardo la Persona en el Backend
             BackendContext.Personas.Add(persona); 
@@ -123,7 +123,7 @@ namespace Publicaciones.Service {
             persona.Apellido = "Urrutia"; 
 
             // Agrego la persona al backend
-            this.Add(persona); 
+            this.AddPersona(persona); 
 
             foreach (Persona p in BackendContext.Personas) {
                 Logger.LogDebug("Persona: {0}", p); 
