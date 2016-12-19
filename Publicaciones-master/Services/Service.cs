@@ -11,11 +11,16 @@ namespace Publicaciones.Service {
     /// Metodos de la interface
     /// </summary>
     public interface IMainService {
+        void AddPublicacion(Publicacion publicacion);
+
+        List< Publicacion > Publicaciones();
+
         void Add(Persona persona); 
 
         List < Persona > FindPersonas(string nombre);
 
         List <Persona> Personas();
+
 
         void Initialize(); 
     }
@@ -64,15 +69,6 @@ namespace Publicaciones.Service {
             Logger.LogInformation("MainService created"); 
         }
 
-        public void Add(Persona persona) {
-
-            // Guardo la Persona en el Backend
-            BackendContext.Personas.Add(persona); 
-
-            // Guardo los cambios
-            BackendContext.SaveChanges(); 
-        }
-
         /// <summary>
         /// Servicio que agrega publicaciones.
         /// </summary>
@@ -92,6 +88,17 @@ namespace Publicaciones.Service {
             return BackendContext.Publicaciones.ToList();
         }
 
+
+        public void Add(Persona persona) {
+
+            // Guardo la Persona en el Backend
+            BackendContext.Personas.Add(persona); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+
+  
         public List < Persona > FindPersonas(string nombre) {
             return BackendContext.Personas
                 .Where(p => p.Nombre.Contains(nombre))

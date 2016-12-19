@@ -47,9 +47,6 @@ namespace Publicaciones.Service {
 
         [Fact]
         public void ObtenerPublicaciones(){
-
-
-            
         }
 
         [Fact]
