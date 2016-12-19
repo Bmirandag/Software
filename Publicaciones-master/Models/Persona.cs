@@ -57,7 +57,7 @@ namespace Publicaciones.Models
         /// al momento de la publicacion
         /// </summary>
         /// <returns></returns>
-        private Grado grado { get; set;}
+        public Grado grado { get; set;}
     
     }
 }

@@ -44,7 +44,7 @@ namespace Publicaciones.Models
         /// Cantidad de Rechazos que ha tenido la publicacion.
         /// </summary>
         /// <returns></returns>
-        public string ContidadRechazos { get; set; }
+        public string CantidadRechazos { get; set; }
 
         /// <summary>
         /// Numero de paginas que tiene la revista.

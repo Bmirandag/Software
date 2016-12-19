@@ -10,18 +10,18 @@ namespace Publicaciones.Models{
         /// Nombre de la unidad.
         /// </summary>
         /// <returns></returns>  
-        private string Nombre{set;get;}
+        public string Nombre{set;get;}
       
         /// <summary>
         /// Direccion de la unidad.
         /// </summary>
         /// <returns></returns>  
-        private string Direccion{set;get;}
+        public string Direccion{set;get;}
       
         /// <summary>
         /// Unidad a la que pertence la unidad, puede ser null.
         /// </summary>
         /// <returns></returns>  
-        private Unidad UnidadSuperior{set;get;}
+        public Unidad UnidadSuperior{set;get;}
     }
 }

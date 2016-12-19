@@ -65,7 +65,7 @@ namespace Publicaciones.Service {
             publicacion.CantidadRechazos = "0"; 
             publicacion.NumeroDePagina = "1";
             Service.AddPublicacion(publicacion);
-            }
+        }
 
          Assert.True(publicaciones.Count == 5);
 
