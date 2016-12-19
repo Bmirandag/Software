@@ -129,6 +129,17 @@ namespace Publicaciones.Service {
                 Logger.LogDebug("Persona: {0}", p); 
             }
 
+            for (int i = 0; i < 5; i++) {
+                Publicacion publicacion = new Publicacion(); 
+                publicacion.Doi = ""+i; 
+                publicacion.Titulo = "Titulo "+i; 
+                publicacion.PaginaInicio = "1"; 
+                publicacion.PaginaFinal = "1"; 
+                publicacion.ContidadRechazos = "0"; 
+                publicacion.NumeroDePagina = "1";
+                this.AddPublicacion(publicacion);
+            }
+
             Initialized = true;
 
             Logger.LogDebug("Inicializacion terminada :)");
