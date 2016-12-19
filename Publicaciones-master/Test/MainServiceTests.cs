@@ -46,6 +46,13 @@ namespace Publicaciones.Service {
         }
 
         [Fact]
+        public void ObtenerPublicaciones(){
+
+
+            
+        }
+
+        [Fact]
         public void InitializeTest()
         {
             Logger.LogInformation("Testing IMainService.Initialize() ..");

@@ -73,6 +73,25 @@ namespace Publicaciones.Service {
             BackendContext.SaveChanges(); 
         }
 
+        /// <summary>
+        /// Servicio que agrega publicaciones.
+        /// </summary>
+        public void AddPublicacion(Publicacion publicacion) {
+
+            // Guardo la Publicacion en el Backend
+            BackendContext.Publicaciones.Add(publicacion); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+        /// <summary>
+        /// Servicio que retorna publicaciones.
+        /// </summary>
+        /// <returns>Lista de Publicaciones</returns>  
+         public List< Publicacion > Publicaciones() {
+            return BackendContext.Publicaciones.ToList();
+        }
+
         public List < Persona > FindPersonas(string nombre) {
             return BackendContext.Personas
                 .Where(p => p.Nombre.Contains(nombre))
