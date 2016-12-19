@@ -22,6 +22,6 @@ namespace Publicaciones.Models{
         /// Unidad a la que pertence la unidad, puede ser null.
         /// </summary>
         /// <returns></returns>  
-        private Unidad unidadSuperior{set;get;}
+        private Unidad UnidadSuperior{set;get;}
     }
 }
