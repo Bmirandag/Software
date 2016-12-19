@@ -48,10 +48,17 @@ namespace Publicaciones.Service {
         [Fact]
         public void ObtenerPublicacionesTest(){
 
-        Logger.LogInformation("Testing IMainService.Publicaciones() ..");
-         List<Publicacion> publicaciones = Service.Publicaciones();
+            Logger.LogInformation("Testing IMainService.Publicaciones() ..");
+            Service.Initialize();
+
+            // No se puede inicializar 2 veces
+            Assert.Throws<Exception>( () => { Service.Initialize(); });
+
+            List<Publicacion> publicaciones = Service.Publicaciones();
+         
             // Debe ser !=  de null
             Assert.True(publicaciones != null);
+
 
             // Debe retornar vacia
             Assert.True(publicaciones.Count == 0);
@@ -67,7 +74,8 @@ namespace Publicaciones.Service {
             Service.AddPublicacion(publicacion);
         }
 
-         Assert.True(publicaciones.Count == 5);
+            //debe tener 5 publicaciones
+            Assert.True(publicaciones.Count == 5);
 
         }
 
