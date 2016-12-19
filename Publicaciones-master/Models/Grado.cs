@@ -1,19 +1,27 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 namespace Publicaciones.Models
 {
-    
+    /// <summary>
+    /// Clase encargada de representar un Grado.
+    /// </summary>
+    /// <returns></returns>
     public class Grado
     {
+        [Key]
+        public string IdGrado { get; set; }
         /// <summary>
         /// Nombre del grado academico
         /// </summary>
         /// <returns></returns>
-        private string nombre { get; set;}
+        public string Nombre { get; set; }
 
         /// <summary>
         /// Fecha en que se obtuvo el grado academico
         /// </summary>
         /// <returns></returns>
-        private string fecha { get; set;}
+        public string Fecha { get; set;} 
     }   
 
 }

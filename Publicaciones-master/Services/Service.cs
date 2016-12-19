@@ -135,7 +135,7 @@ namespace Publicaciones.Service {
                 publicacion.Titulo = "Titulo "+i; 
                 publicacion.PaginaInicio = "1"; 
                 publicacion.PaginaFinal = "1"; 
-                publicacion.ContidadRechazos = "0"; 
+                publicacion.CantidadRechazos = "0"; 
                 publicacion.NumeroDePagina = "1";
                 this.AddPublicacion(publicacion);
             }
