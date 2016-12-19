@@ -51,6 +51,13 @@ namespace Publicaciones.Models
         /// </summary>
         /// <returns></returns>
         public string Genero { get; set; }
+
+        /// <summary>
+        /// Grado academico del autor 
+        /// al momento de la publicacion
+        /// </summary>
+        /// <returns></returns>
+        private Grado grado { get; set;}
     
     }
 }
