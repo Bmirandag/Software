@@ -41,9 +41,15 @@ namespace Publicaciones.Models{
         public string Abstract { get; set; }
 
         /// <summary>
-        /// Identificador de la publicacion.
+        /// Publicacion.
         /// </summary>
         /// <returns></returns>
-        public string Doi { get; set; }
+        public virtual Publicacion publicacion { get; set; }
+
+        /// <summary>
+        /// Lista que contiene los autores de la publicacion
+        /// </summary>
+        /// <returns></returns>
+        public virtual List<Autor> Autores { get; set; }
     }
 }
