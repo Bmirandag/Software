@@ -117,10 +117,26 @@ namespace Publicaciones.Service {
             }
 
             Logger.LogDebug("Realizando Inicializacion .."); 
-            // Persona por defecto
+            // Personas por defecto
             Persona persona = new Persona(); 
             persona.Nombre = "Diego"; 
             persona.Apellido = "Urrutia"; 
+            
+            Persona persona1 = new Persona(); 
+            persona1.Nombre = "David"; 
+            persona1.Apellido = "Meza";
+            
+            Persona persona2 = new Persona(); 
+            persona2.Nombre = "Rodrigo"; 
+            persona2.Apellido = "Contreras";
+            
+            Persona persona3 = new Persona(); 
+            persona3.Nombre = "Bryan"; 
+            persona3.Apellido = "Miranda";
+            
+            Persona persona4 = new Persona(); 
+            persona4.Nombre = "Lorena"; 
+            persona4.Apellido = "Aguilera";
 
             // Agrego la persona al backend
             this.AddPersona(persona); 

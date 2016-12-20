@@ -14,16 +14,24 @@ namespace Publicaciones.Models{
         public string Fecha { get; set; }
 
         /// <summary>
+        /// Tipo de autor
+        /// </summary>
+        /// <returns></returns>
+        public Tipo tipo { get; set; }
+
+        /// <summary>
         /// Rut de la persona quien hizo la publicacion.
         /// </summary>
         /// <returns></returns>
-        public string Rut { get; set; }
-
-        /// <summary>
-        /// Identificador de la publicacion.
-        /// </summary>
-        /// <returns></returns>
-        public string Doi { get; set; }
-        
+        public virtual Persona persona { get; set; }
+    }
+    /// <summary>
+    /// Enumearacion de tipo de autor
+    /// </summary>
+    /// <returns></returns>
+    public enum Tipo {
+        PRINCIPAL,
+        CORRESPONDIENTE,
+        NORMAL
     }
 }
