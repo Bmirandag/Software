@@ -205,7 +205,6 @@ namespace Publicaciones.Service {
             Service.AddAutor(autor);
             Service.AddAutor(autor1);
             Service.AddAutor(autor2);
-            
 
         
             //agregamos el autor al paper
@@ -217,7 +216,7 @@ namespace Publicaciones.Service {
             List<Publicacion> publicacionesrutbd = Service.getPublicacionesByRut("18-2");
 
             Assert.True(publicacionesrutbd != null);
-            Assert.True(publicacionesrutbd.Count == 3);
+            Assert.True(publicacionesrutbd.Count == 2);
 
         }
         
