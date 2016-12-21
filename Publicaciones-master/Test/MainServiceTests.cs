@@ -102,7 +102,7 @@ namespace Publicaciones.Service {
             Logger.LogInformation("Test IMainService.FindPersonas(string nombre) ok");
            
         }
-
+        [Fact]
         public void getPublicacionesByRutTest(){
             Logger.LogInformation("Testing IMainService.getPublicacionesByRut(string rut) ..");
             Service.Initialize();
@@ -123,6 +123,9 @@ namespace Publicaciones.Service {
             //insertamos en el backend
             Service.AddPersona(persona);
             Service.AddPersona(persona1);
+
+            //Obtenemos del backend
+            
 
             //Crear las publicaciones (ya que los paper se asumen como "ACEPTADOS")
             Publicacion publicacion = new Publicacion();
@@ -205,7 +208,20 @@ namespace Publicaciones.Service {
             Service.AddAutor(autor);
             Service.AddAutor(autor1);
             Service.AddAutor(autor2);
+            
+            //Obtenemos del backend
+            List<Paper> papers = Service.getPaperByAutor("18-2");
 
+            //Debe ser distinto de null
+            Assert.True(papers != null);
+
+            //Deben haber 3 paper
+            Assert.True(papers.Count == 3);
+
+            // Print de los papers
+            foreach(Paper papert in papers) {
+                Logger.LogInformation("Paper: {0}", paper.publicacion);
+            }
         
             //agregamos el autor al paper
             Service.AddAutorToPaper(paper.IdentificadorPaper, autor);
@@ -216,7 +232,9 @@ namespace Publicaciones.Service {
             List<Publicacion> publicacionesrutbd = Service.getPublicacionesByRut("18-2");
 
             Assert.True(publicacionesrutbd != null);
-            Assert.True(publicacionesrutbd.Count == 2);
+            Assert.True(publicacionesrutbd.Count == 3);
+
+            Logger.LogInformation("Test IMainService.getPublicacionesByRut(string rut).. ok");
 
         }
         

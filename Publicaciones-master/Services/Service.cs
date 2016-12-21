@@ -24,9 +24,11 @@ namespace Publicaciones.Service {
 
         void AddAutorToPaper(string IdentificadorPaper, Autor autor);
 
+        Persona FindPersonaByRut(String rut);
+
         List < Persona > FindPersonas(string nombre);
 
-        List <Persona> Personas();
+        //List <Persona> Personas();
 
         List< Publicacion > Publicaciones();
 
