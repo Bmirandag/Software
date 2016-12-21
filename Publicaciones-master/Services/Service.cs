@@ -24,11 +24,13 @@ namespace Publicaciones.Service {
 
         void AddAutorToPaper(string IdentificadorPaper, Autor autor);
 
-        Persona FindPersonaByRut(String rut);
+        //Persona FindPersonaByRut(String rut);
 
         List < Persona > FindPersonas(string nombre);
 
-        //List <Persona> Personas();
+        List <Persona> Personas();
+
+        List <Autor> Autores();
 
         List< Publicacion > Publicaciones();
 
@@ -37,7 +39,7 @@ namespace Publicaciones.Service {
         List< Autor > getAutoresByRut(string rut);
 
         List< Paper > getPaperByAutor(string rut);
-
+        
         void Initialize(); 
     }
 
@@ -177,6 +179,14 @@ namespace Publicaciones.Service {
         public List<Persona> Personas() {
             return BackendContext.Personas.ToList();
         }
+
+        /// <summary>
+        /// Servicio que retorna autores.
+        /// </summary>
+        /// <returns>Lista de Autores</returns> 
+        public List<Autor> Autores() {
+            return BackendContext.Autores.ToList();
+        }
         
         /// <summary>
         /// Servicio que retorna publicaciones.
@@ -207,7 +217,7 @@ namespace Publicaciones.Service {
         /// Servicio que retorna Autores por rut.
         /// </summary>
         /// <param name="rut"></param>
-        /// <returns>Lista de Autores</returns> 
+ 
         public List< Autor > getAutoresByRut(string rut){
             return BackendContext.Autores
                     .Where(a => a.persona.Rut.Contains(rut))

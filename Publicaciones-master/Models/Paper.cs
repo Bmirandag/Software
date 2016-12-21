@@ -64,6 +64,7 @@ namespace Publicaciones.Models{
     /// <returns></returns>
     public enum Estado{
         ACEPTADO,
+        ESPERA,
         RECHAZADO
     }
 }

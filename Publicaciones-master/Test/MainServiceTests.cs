@@ -107,26 +107,17 @@ namespace Publicaciones.Service {
             Logger.LogInformation("Testing IMainService.getPublicacionesByRut(string rut) ..");
             Service.Initialize();
             
-            //Crear persona
+            //Crear persona, cuenta de 4 Autorias de 3 Papers Aceptados y 1 en Espera
             Persona persona = new Persona();
             persona.Rut = "18-2";
             persona.Nombre = "Juan";
             persona.Apellido ="Calderon";
             persona.Email = "Juan@hotmail.cl";
 
-            Persona persona1 = new Persona();
-            persona1.Rut = "18-1";
-            persona1.Nombre = "Alfredox";
-            persona1.Apellido ="Rodriguez";
-            persona1.Email = "alRo@hotmail.cl";
-
             //insertamos en el backend
             Service.AddPersona(persona);
-            Service.AddPersona(persona1);
-
-            //Obtenemos del backend
-            
-
+    
+        
             //Crear las publicaciones (ya que los paper se asumen como "ACEPTADOS")
             Publicacion publicacion = new Publicacion();
             publicacion.Titulo = "Aplicaciones Remotas";
@@ -157,6 +148,10 @@ namespace Publicaciones.Service {
             Assert.True(publicaciones != null);
             // Debe haber 3 Publicaciones
             Assert.True(publicaciones.Count == 3);
+            //imprimir las publicaciones
+            foreach(Publicacion publicacions in publicaciones) {
+                Logger.LogInformation("Publicacion: {0}", publicacions.Titulo);
+            }
            
             //Crear Paper
             Paper paper = new Paper();
@@ -174,7 +169,6 @@ namespace Publicaciones.Service {
             paper2.estado = Estado.ACEPTADO;
             paper2.Autores = new List<Autor>();
 
-            
             //Designamos las publicaciones a los papers
             paper.publicacion = publicacion;
             paper1.publicacion = publicacion1;
@@ -184,7 +178,7 @@ namespace Publicaciones.Service {
             Service.AddPaper(paper);
             Service.AddPaper(paper1);
             Service.AddPaper(paper2);
-
+           
             //Crear Autor
             Autor autor = new Autor();
             autor.persona = persona;
@@ -203,36 +197,48 @@ namespace Publicaciones.Service {
             autor2.Fecha = "25-10-2016";
             autor2.tipo = Tipo.PRINCIPAL;
             autor2.paper = paper2;
-            
+          
             //insertamos en el backend
             Service.AddAutor(autor);
             Service.AddAutor(autor1);
             Service.AddAutor(autor2);
-            
+
             //Obtenemos del backend
-            List<Paper> papers = Service.getPaperByAutor("18-2");
-
+            List<Autor> autoresbd = Service.Autores();
             //Debe ser distinto de null
-            Assert.True(papers != null);
-
-            //Deben haber 3 paper
-            Assert.True(papers.Count == 3);
-
-            // Print de los papers
-            foreach(Paper papert in papers) {
-                Logger.LogInformation("Paper: {0}", paper.publicacion);
+            Assert.True(autoresbd != null);
+            //Debe haber 3 autores, es el mismo de rut 18-2 pero con diferentes fechas de autoria
+            Assert.True(autoresbd.Count == 3);
+            //Imprimir autores
+            foreach(Autor autorr in autoresbd) {
+                Logger.LogInformation("Autor: {0}", autorr.Rut);
             }
-        
+
             //agregamos el autor al paper
             Service.AddAutorToPaper(paper.IdentificadorPaper, autor);
             Service.AddAutorToPaper(paper1.IdentificadorPaper, autor);
-            Service.AddAutorToPaper(paper2.IdentificadorPaper, autor);    
+            Service.AddAutorToPaper(paper2.IdentificadorPaper, autor);
+           
+            //Obtenemos del backend
+            List<Paper> papers = Service.getPaperByAutor("18-2");
+            //Debe ser distinto de null
+            Assert.True(papers != null);
+            //Deben haber 3 paper
+            Assert.True(papers.Count == 3);
+            // Print de los papers
+            foreach(Paper papert in papers) {
+                Logger.LogInformation("Paper: {0}", paper.Titulo);
+            }
 
             //Buscar publicaciones por rut
             List<Publicacion> publicacionesrutbd = Service.getPublicacionesByRut("18-2");
 
             Assert.True(publicacionesrutbd != null);
             Assert.True(publicacionesrutbd.Count == 3);
+
+            foreach(Publicacion publicacions in publicacionesrutbd) {
+                Logger.LogInformation("Paper: {0}", publicacions.Titulo);
+            }
 
             Logger.LogInformation("Test IMainService.getPublicacionesByRut(string rut).. ok");
 
