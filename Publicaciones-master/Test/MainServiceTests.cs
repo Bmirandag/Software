@@ -71,31 +71,7 @@ namespace Publicaciones.Service {
             Logger.LogInformation("Test IMainService.Initialize() ok");
         }
 
-        [Fact]
-        public void ObtenerPublicacionesTest(){
-
-        Logger.LogInformation("Testing IMainService.Publicaciones() ..");
-         List<Publicacion> publicaciones = Service.Publicaciones();
-            // Debe ser !=  de null
-            Assert.True(publicaciones != null);
-
-            // Debe retornar vacia
-            Assert.True(publicaciones.Count == 0);
-        
-         for (int i = 0; i < 5; i++) {
-            Publicacion publicacion = new Publicacion(); 
-            publicacion.Doi = ""+i; 
-            publicacion.Titulo = "Titulo "+i; 
-            publicacion.PaginaInicio = "1"; 
-            publicacion.PaginaFinal = "1"; 
-            publicacion.CantidadRechazos = "0"; 
-            publicacion.NumeroDePagina = "1";
-            Service.AddPublicacion(publicacion);
-            }
-        // Debe retornar con 5
-         Assert.True(publicaciones.Count == 5);
-
-        }
+       
 
 
 
