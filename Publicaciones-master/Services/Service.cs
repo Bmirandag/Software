@@ -32,7 +32,7 @@ namespace Publicaciones.Service {
 
         List< Publicacion > getPublicacionesByRut(string rut);
 
-        List< Autor > getAutoresRut(string rut);
+        List< Autor > getAutoresByRut(string rut);
 
         List< Paper > getPaperByAutor(string rut);
 
@@ -189,9 +189,9 @@ namespace Publicaciones.Service {
         /// </summary>
         /// <param name="rut"></param>
         /// <returns>Lista de Publicaciones</returns>  
-        public List< Publicacion > getPublicacionesPorRut(string rut){
-            List< Autor > autorias = this.getAutoresPorRut(rut);
-            List< Paper > paperPorAutor = this.getPaperPorAutor(rut);
+        public List< Publicacion > getPublicacionesByRut(string rut){
+            List< Autor > autorias = this.getAutoresByRut(rut);
+            List< Paper > paperPorAutor = this.getPaperByAutor(rut);
             List< Publicacion > publicacionesPorAutor = new List<Publicacion>();
             foreach(Paper paper in paperPorAutor){
                 if(paper.estado == Estado.ACEPTADO){
@@ -206,7 +206,7 @@ namespace Publicaciones.Service {
         /// </summary>
         /// <param name="rut"></param>
         /// <returns>Lista de Autores</returns> 
-        public List< Autor > getAutoresPorRut(string rut){
+        public List< Autor > getAutoresByRut(string rut){
             return BackendContext.Autores
                     .Where(a => a.persona.Rut.Contains(rut))
                     .OrderBy(a => a.Fecha)
@@ -218,8 +218,8 @@ namespace Publicaciones.Service {
         /// </summary>
         /// <param name="rut"></param>
         /// <returns>Lista de Paper</returns> 
-        public List< Paper > getPaperPorAutor(string rut){
-            List< Autor > autorias = this.getAutoresPorRut(rut);
+        public List< Paper > getPaperByAutor(string rut){
+            List< Autor > autorias = this.getAutoresByRut(rut);
             List< Paper > paperPorAutor = new List<Paper>();
             foreach(Autor autor in autorias){
                 paperPorAutor.Add(autor.paper);
