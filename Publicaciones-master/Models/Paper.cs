@@ -41,15 +41,29 @@ namespace Publicaciones.Models{
         public string Abstract { get; set; }
 
         /// <summary>
+        /// Estado del paper.
+        /// </summary>
+        /// <returns></returns>
+        public Estado estado { get; set; }
+
+        /// <summary>
         /// Publicacion.
         /// </summary>
         /// <returns></returns>
         public virtual Publicacion publicacion { get; set; }
 
         /// <summary>
-        /// Lista que contiene los autores de la publicacion
+        /// Lista que contiene los autores del paper.
         /// </summary>
         /// <returns></returns>
         public virtual List<Autor> Autores { get; set; }
+    }
+    /// <summary>
+    /// Enumeracion.
+    /// </summary>
+    /// <returns></returns>
+    public enum Estado{
+        ACEPTADO,
+        RECHAZADO
     }
 }

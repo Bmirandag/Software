@@ -22,15 +22,19 @@ namespace Publicaciones.Service {
 
         void AddPublicacion(Publicacion publicacion);
 
+        void AddAutorToPaper(string IdentificadorPaper, Autor autor);
+
         List < Persona > FindPersonas(string nombre);
 
         List <Persona> Personas();
 
         List< Publicacion > Publicaciones();
 
-        List< Publicacion > getPublicacionesPorRut(string rut);
+        List< Publicacion > getPublicacionesByRut(string rut);
 
-        List< Autor > getAutoresPorRut(string rut);
+        List< Autor > getAutoresRut(string rut);
+
+        List< Paper > getPaperByAutor(string rut);
 
         void Initialize(); 
     }
@@ -138,15 +142,36 @@ namespace Publicaciones.Service {
             // Guardo los cambios
             BackendContext.SaveChanges(); 
         }
+        
+        /// <summary>
+        /// Servicio que agrega un autor a un paper.
+        /// </summary>
+        /// <param name="IdentificadorPaper"></param>
+        /// <param name="autor"></param>
+        /// <returns>Lista de Personas</returns> 
+        public void AddAutorToPaper(string IdentificadorPaper, Autor autor){
+            BackendContext.Papers
+                .Where(p => p.IdentificadorPaper == IdentificadorPaper)
+                .First().Autores.Add(autor);
+            BackendContext.SaveChanges();
+        }
 
-  
+        /// <summary>
+        /// Servicio que retorna personas.
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns>Lista de Personas</returns>  
         public List < Persona > FindPersonas(string nombre) {
             return BackendContext.Personas
                 .Where(p => p.Nombre.Contains(nombre))
                 .OrderBy(p => p.Nombre)
                 .ToList(); 
         }
-
+        
+        /// <summary>
+        /// Servicio que retorna personas.
+        /// </summary>
+        /// <returns>Lista de Personas</returns> 
         public List<Persona> Personas() {
             return BackendContext.Personas.ToList();
         }
@@ -158,13 +183,22 @@ namespace Publicaciones.Service {
          public List< Publicacion > Publicaciones() {
             return BackendContext.Publicaciones.ToList();
         }
+
         /// <summary>
         /// Servicio que retorna publicaciones por rut.
         /// </summary>
         /// <param name="rut"></param>
         /// <returns>Lista de Publicaciones</returns>  
-        List< Publicacion > getPublicacionesPorRut(string rut){
-           return null;
+        public List< Publicacion > getPublicacionesPorRut(string rut){
+            List< Autor > autorias = this.getAutoresPorRut(rut);
+            List< Paper > paperPorAutor = this.getPaperPorAutor(rut);
+            List< Publicacion > publicacionesPorAutor = new List<Publicacion>();
+            foreach(Paper paper in paperPorAutor){
+                if(paper.estado == Estado.ACEPTADO){
+                    publicacionesPorAutor.Add(paper.publicacion);
+                }
+            }
+            return publicacionesPorAutor;
         }
 
         /// <summary>
@@ -172,12 +206,26 @@ namespace Publicaciones.Service {
         /// </summary>
         /// <param name="rut"></param>
         /// <returns>Lista de Autores</returns> 
-        List< Autor > getAutoresPorRut(string rut){
-            return null;
-
+        public List< Autor > getAutoresPorRut(string rut){
+            return BackendContext.Autores
+                    .Where(a => a.persona.Rut.Contains(rut))
+                    .OrderBy(a => a.Fecha)
+                    .ToList();
         }
 
-        
+        /// <summary>
+        /// Servicio que retorna los Papers por Autor.
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns>Lista de Paper</returns> 
+        public List< Paper > getPaperPorAutor(string rut){
+            List< Autor > autorias = this.getAutoresPorRut(rut);
+            List< Paper > paperPorAutor = new List<Paper>();
+            foreach(Autor autor in autorias){
+                paperPorAutor.Add(autor.paper);
+            }
+            return paperPorAutor;
+        }
 
         public void Initialize() {
 

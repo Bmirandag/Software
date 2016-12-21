@@ -27,10 +27,16 @@ namespace Publicaciones.Models{
         public Tipo tipo { get; set; }
 
         /// <summary>
-        /// Rut de la persona quien hizo la publicacion.
+        /// Persona que es autor.
         /// </summary>
         /// <returns></returns>
         public virtual Persona persona { get; set; }
+        
+        /// <summary>
+        /// Persona que es autor.
+        /// </summary>
+        /// <returns></returns>
+        public virtual Paper paper { get; set; }
     }
     /// <summary>
     /// Enumearacion de tipos de autor
