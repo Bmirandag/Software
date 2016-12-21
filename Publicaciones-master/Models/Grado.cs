@@ -22,6 +22,12 @@ namespace Publicaciones.Models
         /// </summary>
         /// <returns></returns>
         public string Fecha { get; set;} 
+
+        /// <summary>
+        /// Rut de la persona que tiene el grado
+        /// </summary>
+        /// <returns></returns>
+        public string Rut { get; set;} 
     }   
 
 }

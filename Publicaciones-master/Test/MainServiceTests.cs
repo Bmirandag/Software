@@ -46,25 +46,6 @@ namespace Publicaciones.Service {
         }
 
         [Fact]
-        public void ObtenerPublicacionesTest(){
-
-            Logger.LogInformation("Testing IMainService.Publicaciones() ..");
-            Service.Initialize();
-
-            // No se puede inicializar 2 veces
-            Assert.Throws<Exception>( () => { Service.Initialize(); });
-
-            List<Publicacion> publicaciones = Service.Publicaciones();
-         
-            // Debe ser !=  de null
-            Assert.True(publicaciones != null);
-                    
-            //debe tener 5 publicaciones
-            Assert.True(publicaciones.Count == 5);
-
-        }
-
-        [Fact]
         public void InitializeTest()
         {
             Logger.LogInformation("Testing IMainService.Initialize() ..");
@@ -79,7 +60,7 @@ namespace Publicaciones.Service {
             // Debe ser !=  de null
             Assert.True(personas != null);
 
-            // Debe haber solo 1
+            // Debe haber solo 4 personas
             Assert.True(personas.Count == 1);
 
             // Print de la persona
@@ -87,7 +68,27 @@ namespace Publicaciones.Service {
                 Logger.LogInformation("Persona: {0}", persona);
             }
 
+            // Personas en la BD
+            List<Publicacion> publicaciones = Service.Publicaciones();
+
+            // Debe ser !=  de null
+            Assert.True(publicaciones != null);
+
+            // Debe haber 4 publicaciones
+            Assert.True(publicaciones.Count == 4);
+
+            // Print de la persona
+            foreach(Publicacion publicacion in publicaciones) {
+                Logger.LogInformation("Publicacion: {0}", publicacion);
+            }
+
             Logger.LogInformation("Test IMainService.Initialize() ok");
+        }
+
+        [Fact]
+        public void publicacionesTest(){
+            Logger.LogInformation("Testing IMainService.publicaciones ..");
+            Service.Initialize();
         }
 
         void IDisposable.Dispose()

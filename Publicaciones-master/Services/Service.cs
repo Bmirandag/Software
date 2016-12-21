@@ -16,9 +16,9 @@ namespace Publicaciones.Service {
 
         void AddAutor(Autor autor);
 
-        void addGrado(Grado grado);
+        void AddGrado(Grado grado);
 
-        void addPaper(Paper paper);
+        void AddPaper(Paper paper);
 
         void AddPublicacion(Publicacion publicacion);
 
@@ -110,7 +110,7 @@ namespace Publicaciones.Service {
         /// <summary>
         /// Servicio que agrega Grado.
         /// </summary>
-         public void addGrado(Grado grado){
+         public void AddGrado(Grado grado){
 
             // Guardo el Grado en el Backend
             BackendContext.Grados.Add(grado); 
@@ -122,7 +122,7 @@ namespace Publicaciones.Service {
         /// <summary>
         /// Servicio que agrega paper.
         /// </summary>
-         public void addPaper(Paper paper){
+         public void AddPaper(Paper paper){
 
             // Guardo el Paper en el Backend
             BackendContext.Papers.Add(paper); 
@@ -209,7 +209,6 @@ namespace Publicaciones.Service {
         public List< Autor > getAutoresByRut(string rut){
             return BackendContext.Autores
                     .Where(a => a.persona.Rut.Contains(rut))
-                    .OrderBy(a => a.Fecha)
                     .ToList();
         }
 
@@ -238,25 +237,79 @@ namespace Publicaciones.Service {
             Persona persona = new Persona(); 
             persona.Nombre = "Diego"; 
             persona.Apellido = "Urrutia"; 
+
+            Persona persona1 = new Persona(); 
+            persona1.Nombre = "Diego"; 
+            persona1.Apellido = "Urrutia"; 
+
+            Persona persona2 = new Persona(); 
+            persona2.Nombre = "Diego"; 
+            persona2.Apellido = "Urrutia"; 
+
+            Persona persona3 = new Persona(); 
+            persona3.Nombre = "Diego"; 
+            persona3.Apellido = "Urrutia"; 
             
             // Agrego la persona al backend
             this.AddPersona(persona); 
+            this.AddPersona(persona1); 
+            this.AddPersona(persona2); 
+            this.AddPersona(persona3); 
+
+            // Papers por defecto
+            Paper paper = new Paper();
+            paper.Titulo = "Paper";
+            Paper paper1 = new Paper();
+            paper1.Titulo = "Paper1";
+            Paper paper = new Paper();
+            paper2.Titulo = "Paper2";
+            Paper paper = new Paper();
+            paper3.Titulo = "Paper3";
+
+            // Agrego los papers al backend
+            this.AddPaper(paper);
+            this.AddPaper(paper1);
+            this.AddPaper(paper2);
+            this.AddPaper(paper3);
+
+            // Grados asociados a la persona
+            Grado grado = new Grado();
+            grado.Nombre = "Magister";
+            grado.Fecha = "10-12-2016"
+            grado.Rut = persona.Rut;
+
+            Grado grado1 = new Grado();
+            grado1.Nombre = "Doctor";
+            grado1.Fecha = "13-12-2016"
+            grado1.Rut = persona1.Rut;
+
+            Grado grado2 = new Grado();
+            grado2.Nombre = "Magister en minas";
+            grado2.Fecha = "12-21-2016"
+            grado2.Rut = persona2.Rut;
+
+            Grado grado3 = new Grado();
+            grado3.Nombre = "Doctorado en Geología";
+            grado3.Fecha = "12-21-2016"
+            grado3.Rut = persona3.Rut;
+
+            Grado grado4 = new Grado();
+            grado4.Nombre = "Magister en Minas";
+            grado4.Fecha = "12-21-2016"
+            grado4.Rut = persona3.Rut;
+
+            // Agrego los paper al backend
+            this.AddGrado(grado1);
+            this.AddGrado(grado2);
+            this.AddGrado(grado3);
+            this.AddGrado(grado4);
+            this.AddGrado(grado5);
 
             foreach (Persona p in BackendContext.Personas) {
                 Logger.LogDebug("Persona: {0}", p); 
             }
 
-            for (int i = 0; i < 5; i++) {
-                Publicacion publicacion = new Publicacion(); 
-                publicacion.Doi = ""+i; 
-                publicacion.Titulo = "Titulo "+i; 
-                publicacion.PaginaInicio = "1"; 
-                publicacion.PaginaFinal = "1"; 
-                publicacion.CantidadRechazos = "0"; 
-                publicacion.NumeroDePagina = "1";
-                this.AddPublicacion(publicacion);
-            }
-
+            
             Initialized = true;
 
             Logger.LogDebug("Inicializacion terminada :)");
