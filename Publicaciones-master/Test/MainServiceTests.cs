@@ -60,7 +60,7 @@ namespace Publicaciones.Service {
             // Debe ser !=  de null
             Assert.True(personas != null);
 
-            // Debe haber solo 4 personas
+            // Debe haber solo 1 persona
             Assert.True(personas.Count == 1);
 
             // Print de la persona
@@ -68,27 +68,75 @@ namespace Publicaciones.Service {
                 Logger.LogInformation("Persona: {0}", persona);
             }
 
-            // Personas en la BD
-            List<Publicacion> publicaciones = Service.Publicaciones();
-
-            // Debe ser !=  de null
-            Assert.True(publicaciones != null);
-
-            // Debe haber 4 publicaciones
-            Assert.True(publicaciones.Count == 4);
-
-            // Print de la persona
-            foreach(Publicacion publicacion in publicaciones) {
-                Logger.LogInformation("Publicacion: {0}", publicacion);
-            }
-
             Logger.LogInformation("Test IMainService.Initialize() ok");
         }
 
         [Fact]
-        public void publicacionesTest(){
-            Logger.LogInformation("Testing IMainService.publicaciones ..");
+        public void FindPersonasTest(){
+            Logger.LogInformation("Testing IMainService.FindPersonas(string rut) ..");
             Service.Initialize();
+
+            // Crear persona
+            Persona persona = new Persona();
+            persona.Rut = "18501813-k";
+            persona.Nombre = "Alfredox";
+            persona.Email = "amg005@hotmail.cl";
+
+            Persona persona1 = new Persona();
+            persona1.Rut = "1777777-3";
+            persona1.Nombre = "Alfredox";
+            persona1.Email = "alfredo@hotmail.cl";
+
+            //insertamos en el backend
+            Service.AddPersona(persona);
+            Service.AddPersona(persona1);
+
+            //Obtener desde el backend
+            List<Persona> personasbd = Service.FindPersonas("Alfredox");
+
+            // Debe ser !=  de null
+            Assert.True(personasbd != null);
+            // Debe haber 2 personas con el nombre "Alfredox"
+            Assert.True(personasbd.Count == 2);
+
+            Logger.LogInformation("Test IMainService.FindPersonas(string nombre) ok");
+           
+        }
+
+        public void AddAutorToPaperTest(){
+            Logger.LogInformation("Testing IMainService.AddAutorToPaper(string IdentificadorPaper, Autor autor) ..");
+            Service.Initialize();
+            
+            //Crear persona
+            Persona persona = new Persona();
+            persona.Rut = "18501813-k";
+            persona.Nombre = "Alfredox";
+            persona.Apellido ="Calderon";
+            persona.Email = "alcal@hotmail.cl";
+
+            //insertamos en el backend
+            Service.AddPersona(persona);
+
+            //Crear Autor
+            Autor autor = new Autor();
+            autor.persona = persona;
+            autor.tipo = tipo.PRINCIPAL;
+            
+            //insertamos en el backend
+            Service.AddAutor(autor);
+
+            //Crear Paper
+            Paper paper = new Paper();
+            paper.Titulo = "Aplicaciones Remotas";
+            paper.estado = estado.ACEPTADO;
+            paper.autores = new List<Autor>();
+
+            //insertamos en el backend
+            Service.AddPaper(paper);
+            
+            //agregamos el autor al paper
+            Service.AddAutorToPaper(paper.IdentificadorPaper, autor);
+
         }
 
         void IDisposable.Dispose()

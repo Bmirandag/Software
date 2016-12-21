@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 namespace Publicaciones.Models{
 
     /// <summary>
@@ -7,7 +10,7 @@ namespace Publicaciones.Models{
     
     public class Autor{
         
-        
+        [Key]
         /// <summary>
         /// Identificador de autor.
         /// </summary>
@@ -31,12 +34,24 @@ namespace Publicaciones.Models{
         /// </summary>
         /// <returns></returns>
         public virtual Persona persona { get; set; }
+
+        /// <summary>
+        /// Rut persona.
+        /// </summary>
+        /// <returns></returns>
+        public string Rut { get; set; }
         
         /// <summary>
         /// Persona que es autor.
         /// </summary>
         /// <returns></returns>
         public virtual Paper paper { get; set; }
+
+        /// <summary>
+        /// Identificador del paper
+        /// </summary>
+        /// <returns></returns>
+        public string IdentificadorPaper { get; set; }
     }
     /// <summary>
     /// Enumearacion de tipos de autor
