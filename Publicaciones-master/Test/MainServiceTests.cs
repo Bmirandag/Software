@@ -127,65 +127,50 @@ namespace Publicaciones.Service {
             //Crear las publicaciones (ya que los paper se asumen como "ACEPTADOS")
             Publicacion publicacion = new Publicacion();
             publicacion.Titulo = "Aplicaciones Remotas";
-            publicacion.Volumen = 123;
-            publicacion.PaginaInicio = 10;
-            publicacion.PaginaFinal = 100;
+            publicacion.Volumen = "123";
+            publicacion.PaginaInicio = "10";
+            publicacion.PaginaFinal = "100";
 
             Publicacion publicacion1 = new Publicacion();
             publicacion1.Titulo = "Web Informáticas";
-            publicacion1.Volumen = 111;
-            publicacion1.PaginaInicio = 30;
-            publicacion1.PaginaFinal = 131;
+            publicacion1.Volumen = "111";
+            publicacion1.PaginaInicio = "30";
+            publicacion1.PaginaFinal = "131";
 
             Publicacion publicacion2 = new Publicacion();
             publicacion2.Titulo = "Compiladores";
-            publicacion2.Volumen = 12;
-            publicacion2.PaginaInicio = 110;
-            publicacion2.PaginaFinal = 1030;
+            publicacion2.Volumen = "12";
+            publicacion2.PaginaInicio = "110";
+            publicacion2.PaginaFinal = "1030";
 
             //insertamos en el backend
             Service.AddPublicacion(publicacion);
             Service.AddPublicacion(publicacion1);
             Service.AddPublicacion(publicacion2);
-
-            //Crear Autor
-            Autor autor = new Autor();
-            autor.persona = persona;
-            autor.fecha = "22-10-2016";
-            autor.tipo = tipo.PRINCIPAL;
-            autor.publicacion = publicacion;
-
-            Autor autor1 = new Autor();
-            autor1.persona = persona;
-            autor1.fecha = "24-10-2016";
-            autor1.tipo = tipo.CORRESPONDIENTE;
-            autor1.publicacion = publicacion1;
-
-            Autor autor2 = new Autor();
-            autor2.persona = persona;
-            autor2.fecha = "25-10-2016";
-            autor2.tipo = tipo.PRINCIPAL;
-            autor2.publicacion = publicacion2;
             
-            //insertamos en el backend
-            Service.AddAutor(autor);
-            Service.AddAutor(autor1);
-
+            //Obtener desde el backend
+            List<Publicacion> publicaciones = Service.Publicaciones();
+            // Debe ser !=  de null
+            Assert.True(publicaciones != null);
+            // Debe haber 3 Publicaciones
+            Assert.True(publicaciones.Count == 3);
+           
             //Crear Paper
             Paper paper = new Paper();
             paper.Titulo = "Aplicaciones Remotas";
-            paper.estado = estado.ACEPTADO;
-            paper.autores = new List<Autor>();
+            paper.estado = Estado.ACEPTADO;
+            paper.Autores = new List<Autor>();
 
             Paper paper1 = new Paper();
             paper1.Titulo = "Web Informáticas";
-            paper1.estado = estado.ACEPTADO;
-            paper1.autores = new List<Autor>();
+            paper1.estado = Estado.ACEPTADO;
+            paper1.Autores = new List<Autor>();
             
             Paper paper2 = new Paper();
             paper2.Titulo = "Compiladores";
-            paper2.estado = estado.ACEPTADO;
-            paper2.autores = new List<Autor>();
+            paper2.estado = Estado.ACEPTADO;
+            paper2.Autores = new List<Autor>();
+
             
             //Designamos las publicaciones a los papers
             paper.publicacion = publicacion;
@@ -197,12 +182,45 @@ namespace Publicaciones.Service {
             Service.AddPaper(paper1);
             Service.AddPaper(paper2);
 
+            //Crear Autor
+            Autor autor = new Autor();
+            autor.persona = persona;
+            autor.Fecha = "22-10-2016";
+            autor.tipo = Tipo.PRINCIPAL;
+            autor.paper = paper;
+
+            Autor autor1 = new Autor();
+            autor1.persona = persona;
+            autor1.Fecha = "24-10-2016";
+            autor1.tipo = Tipo.CORRESPONDIENTE;
+            autor1.paper = paper1;
+
+            Autor autor2 = new Autor();
+            autor2.persona = persona;
+            autor2.Fecha = "25-10-2016";
+            autor2.tipo = Tipo.PRINCIPAL;
+            autor2.paper = paper2;
+            
+            //insertamos en el backend
+            Service.AddAutor(autor);
+            Service.AddAutor(autor1);
+            Service.AddAutor(autor2);
+            
+
+        
             //agregamos el autor al paper
             Service.AddAutorToPaper(paper.IdentificadorPaper, autor);
             Service.AddAutorToPaper(paper1.IdentificadorPaper, autor);
-            Service.AddAutorToPaper(paper2.IdentificadorPaper, autor);       
+            Service.AddAutorToPaper(paper2.IdentificadorPaper, autor);    
+
+            //Buscar publicaciones por rut
+            List<Publicacion> publicacionesrutbd = Service.getPublicacionesByRut("18-2");
+
+            Assert.True(publicacionesrutbd != null);
+            Assert.True(publicacionesrutbd.Count == 3);
 
         }
+        
 
         void IDisposable.Dispose()
         {
