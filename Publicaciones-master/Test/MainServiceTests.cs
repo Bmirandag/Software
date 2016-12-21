@@ -98,6 +98,10 @@ namespace Publicaciones.Service {
             Assert.True(personasbd != null);
             // Debe haber 2 personas con el nombre "Alfredox"
             Assert.True(personasbd.Count == 2);
+            // Print de las personas
+            foreach(Persona personas in personasbd) {
+                Logger.LogInformation("Persona: {0}", personas.Rut);
+            }
 
             Logger.LogInformation("Test IMainService.FindPersonas(string nombre) ok");
            
@@ -227,7 +231,7 @@ namespace Publicaciones.Service {
             Assert.True(papers.Count == 3);
             // Print de los papers
             foreach(Paper papert in papers) {
-                Logger.LogInformation("Paper: {0}", paper.Titulo);
+                Logger.LogInformation("Paper: {0}", papert.Titulo);
             }
 
             //Buscar publicaciones por rut
