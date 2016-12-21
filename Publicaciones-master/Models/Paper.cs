@@ -14,7 +14,7 @@ namespace Publicaciones.Models{
         /// Identificador del paper.
         /// </summary>
         /// <returns></returns>
-        public string id { get; set;}
+        public string IdentificadorPaper { get; set; }
 
         /// <summary>
         /// Titulo del paper.

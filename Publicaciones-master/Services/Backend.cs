@@ -25,14 +25,31 @@ namespace Publicaciones.Backend {
         /// Representacion de las Personas del Backend
         /// </summary>
         /// <returns>Link a la BD de Personas</returns>
-        public DbSet < Persona > Personas {get; set; }
+        public DbSet < Persona > Personas { get; set; }
 
-
-         /// <summary>
+        /// <summary>
         /// Representacion de las Publicaciones del Backend
         /// </summary>
         /// <returns>Link a la BD de Publicaciones</returns>
-        public DbSet < Publicacion > Publicaciones {get; set; }
+        public DbSet < Publicacion > Publicaciones { get; set; }
+
+        /// <summary>
+        /// Representacion de los autores del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Publicaciones</returns>
+        public DbSet < Autor > Autores { get; set; }
+
+        /// <summary>
+        /// Representacion de los paper del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Publicaciones</returns>
+        public DbSet < Paper > Papers { get; set; }
+
+        /// <summary>
+        /// Representacion de los grados del Backend
+        /// </summary>
+        /// <returns>Link a la BD de Publicaciones</returns>
+        public DbSet < Grado > Grados { get; set; }
     }
 
 }

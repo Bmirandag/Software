@@ -51,6 +51,7 @@ namespace Publicaciones.Models
         /// </summary>
         /// <returns></returns>
         public string NumeroDePagina{get; set;}
+
     }
 
 }

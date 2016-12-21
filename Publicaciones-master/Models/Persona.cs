@@ -14,7 +14,7 @@ namespace Publicaciones.Models
         /// Rut de la persona.
         /// </summary>
         /// <returns></returns>
-        public string Rut { get; set; }
+        public string Rut{ get; set; }
 
         /// <summary>
         /// Nombre de la persona.
@@ -57,7 +57,7 @@ namespace Publicaciones.Models
         /// al momento de la publicacion
         /// </summary>
         /// <returns></returns>
-        public Grado grado { get; set;}
+        public virtual Grado grado { get; set; }
     
     }
 }

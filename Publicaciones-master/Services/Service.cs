@@ -11,16 +11,26 @@ namespace Publicaciones.Service {
     /// Metodos de la interface
     /// </summary>
     public interface IMainService {
-        void AddPublicacion(Publicacion publicacion);
-
-        List< Publicacion > Publicaciones();
 
         void AddPersona(Persona persona); 
+
+        void AddAutor(Autor autor);
+
+        void addGrado(Grado grado);
+
+        void addPaper(Paper paper);
+
+        void AddPublicacion(Publicacion publicacion);
 
         List < Persona > FindPersonas(string nombre);
 
         List <Persona> Personas();
 
+        List< Publicacion > Publicaciones();
+
+        List< Publicacion > getPublicacionesPorRut(string rut);
+
+        List< Autor > getAutoresPorRut(string rut);
 
         void Initialize(); 
     }
@@ -70,29 +80,60 @@ namespace Publicaciones.Service {
         }
 
         /// <summary>
+        /// Servicio que agrega Personas.
+        /// </summary>
+        public void AddPersona(Persona persona) {
+
+            // Guardo la Persona en el Backend
+            BackendContext.Personas.Add(persona); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+
+        /// <summary>
+        /// Servicio que agrega Autores.
+        /// </summary>
+        public void AddAutor(Autor autor){
+
+            // Guardo el Autor en el Backend
+            BackendContext.Autores.Add(autor); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+        
+        /// <summary>
+        /// Servicio que agrega Grado.
+        /// </summary>
+         public void addGrado(Grado grado){
+
+            // Guardo el Grado en el Backend
+            BackendContext.Grados.Add(grado); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+
+        /// <summary>
+        /// Servicio que agrega paper.
+        /// </summary>
+         public void addPaper(Paper paper){
+
+            // Guardo el Paper en el Backend
+            BackendContext.Papers.Add(paper); 
+
+            // Guardo los cambios
+            BackendContext.SaveChanges(); 
+        }
+
+        /// <summary>
         /// Servicio que agrega publicaciones.
         /// </summary>
         public void AddPublicacion(Publicacion publicacion) {
 
             // Guardo la Publicacion en el Backend
             BackendContext.Publicaciones.Add(publicacion); 
-
-            // Guardo los cambios
-            BackendContext.SaveChanges(); 
-        }
-        /// <summary>
-        /// Servicio que retorna publicaciones.
-        /// </summary>
-        /// <returns>Lista de Publicaciones</returns>  
-         public List< Publicacion > Publicaciones() {
-            return BackendContext.Publicaciones.ToList();
-        }
-
-
-        public void AddPersona(Persona persona) {
-
-            // Guardo la Persona en el Backend
-            BackendContext.Personas.Add(persona); 
 
             // Guardo los cambios
             BackendContext.SaveChanges(); 
@@ -109,6 +150,34 @@ namespace Publicaciones.Service {
         public List<Persona> Personas() {
             return BackendContext.Personas.ToList();
         }
+        
+        /// <summary>
+        /// Servicio que retorna publicaciones.
+        /// </summary>
+        /// <returns>Lista de Publicaciones</returns>  
+         public List< Publicacion > Publicaciones() {
+            return BackendContext.Publicaciones.ToList();
+        }
+        /// <summary>
+        /// Servicio que retorna publicaciones por rut.
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns>Lista de Publicaciones</returns>  
+        List< Publicacion > getPublicacionesPorRut(string rut){
+           return null;
+        }
+
+        /// <summary>
+        /// Servicio que retorna Autores por rut.
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns>Lista de Autores</returns> 
+        List< Autor > getAutoresPorRut(string rut){
+            return null;
+
+        }
+
+        
 
         public void Initialize() {
 
@@ -122,22 +191,6 @@ namespace Publicaciones.Service {
             persona.Nombre = "Diego"; 
             persona.Apellido = "Urrutia"; 
             
-            Persona persona1 = new Persona(); 
-            persona1.Nombre = "David"; 
-            persona1.Apellido = "Meza";
-            
-            Persona persona2 = new Persona(); 
-            persona2.Nombre = "Rodrigo"; 
-            persona2.Apellido = "Contreras";
-            
-            Persona persona3 = new Persona(); 
-            persona3.Nombre = "Bryan"; 
-            persona3.Apellido = "Miranda";
-            
-            Persona persona4 = new Persona(); 
-            persona4.Nombre = "Lorena"; 
-            persona4.Apellido = "Aguilera";
-
             // Agrego la persona al backend
             this.AddPersona(persona); 
 

@@ -7,6 +7,13 @@ namespace Publicaciones.Models{
     
     public class Autor{
         
+        
+        /// <summary>
+        /// Identificador de autor.
+        /// </summary>
+        /// <returns></returns>
+        public string IdAutor { get; set; }
+
         /// <summary>
         /// Fecha en el que la persona hizo la publicacion.
         /// </summary>
@@ -26,7 +33,7 @@ namespace Publicaciones.Models{
         public virtual Persona persona { get; set; }
     }
     /// <summary>
-    /// Enumearacion de tipo de autor
+    /// Enumearacion de tipos de autor
     /// </summary>
     /// <returns></returns>
     public enum Tipo {
